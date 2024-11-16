@@ -42,69 +42,12 @@ This demonstrates the cconnection of MySQL database and Node.js to create a simp
 
 
    // Question 2 goes here
-   // Endpoint to retrieve all providers
-   app.get('/providers', (req, res) => {
-      // Retrieve data from the providers table
-      db.query('SELECT first_name, last_name, provider_specialty FROM providers', (err, results) => {
-         if (err) {
-               console.error(err);
-               res.status(500).send('Error retrieving providers');
-         } else {
-               // Render the providers data using EJS
-               res.render('providers', { results: results });
-         }
-      });
-   });  // then created providers.ejs file inside views folder and updated it to display providers details
-
 
 
    // Question 3 goes here
-   // Endpoint to filter patients by first name
-   app.get('/data', (req, res) => {
-      const firstName = req.query.first_name; // Get the first name from query parameters
-
-      // Validate that a first name was provided
-      if (!firstName) {
-         return res.status(400).send('First name query parameter is required.');
-      }
-
-      // Retrieve patients with the specified first name from the database
-      db.query('SELECT * FROM patients WHERE first_name = ?', [firstName], (err, results) => {
-         if (err) {
-               console.error(err);
-               return res.status(500).send('Error retrieving patients');
-         }
-
-         // Render the filtered patient data using EJS
-         res.render('data', { results: results });
-      });
-   });
 
 
    // Question 4 goes here
-   
-   // Endpoint to filter providers by specialty
-   app.get('/providers', (req, res) => {
-      const specialty = req.query.specialty; // Get the specialty from query parameters
-
-      // Validate that a specialty was provided
-      if (!specialty) {
-         return res.status(400).send('Specialty query parameter is required.');
-      }
-
-      // Retrieve providers with the specified specialty from the database
-      db.query('SELECT first_name, last_name, provider_specialty FROM providers WHERE provider_specialty = ?', [specialty], (err, results) => {
-         if (err) {
-               console.error(err);
-               return res.status(500).send('Error retrieving providers');
-         }
-
-         // Render the filtered provider data using EJS
-         res.render('providers', { results: results });
-      }); 
-   }); // then access the template using this 'http://localhost:3300/providers?specialty=Cardiology'
-   
-
 
    
 
